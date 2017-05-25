@@ -1,2 +1,2 @@
 # vlc-android
-viatech
+http://www.viatech.com/cn/
