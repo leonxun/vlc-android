@@ -166,11 +166,13 @@ fi
 ####################
 # Fetch VLC source #
 ####################
-
+#Do not use this hash when we release, we use our latest changelist in branch viatech-dev!!!
 TESTED_HASH=72a0033
 if [ ! -d "vlc" ]; then
     diagnostic "VLC source not found, cloning"
-    git clone http://git.videolan.org/git/vlc.git vlc
+    git clone https://github.com/leonxun/vlc.git vlc
+	git checkout viatech-dev
+	git pull
     checkfail "vlc source: git clone failed"
 else
     diagnostic "VLC source found"
@@ -183,9 +185,9 @@ else
 EOF
         exit 1
     fi
-    if [ "$RELEASE" = 1 ]; then
-        git reset --hard ${TESTED_HASH}
-    fi
+    #if [ "$RELEASE" = 1 ]; then
+    #    git reset --hard ${TESTED_HASH}
+    #fi
     cd ..
 fi
 
