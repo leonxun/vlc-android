@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/button_search" />
+
+    <org.videolan.vlc.gui.view.SwipeRefreshLayout
+        android:id="@+id/swipeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/searchButton" >
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <org.videolan.vlc.gui.view.ContextMenuRecyclerView
+                android:id="@+id/network_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/android:empty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/directory_empty"/>
+        </FrameLayout>
+    </org.videolan.vlc.gui.view.SwipeRefreshLayout>
+
+    <include layout="@layout/shadow_top"/>
+</RelativeLayout>

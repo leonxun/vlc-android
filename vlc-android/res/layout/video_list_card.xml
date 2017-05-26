@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:vlc="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="media"
+            type="org.videolan.medialibrary.media.MediaWrapper" />
+
+        <variable
+            name="time"
+            type="String" />
+
+        <variable
+            name="bgColor"
+            type="int" />
+
+        <variable
+            name="max"
+            type="int" />
+
+        <variable
+            name="progress"
+            type="int" />
+
+        <variable
+            name="resolution"
+            type="String" />
+
+        <variable
+            name="cover"
+            type="android.graphics.drawable.BitmapDrawable" />
+
+        <variable
+            name="scaleType"
+            type="android.widget.ImageView.ScaleType" />
+
+        <variable
+            name="holder"
+            type="org.videolan.vlc.gui.video.VideoListAdapter.ViewHolder" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="@{holder::onClick}"
+        android:onLongClick="@{holder::onLongClick}"
+        android:longClickable="true"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:orientation="horizontal">
+        <!-- Image loading is handled by org.videolan.vlc.gui.helpers.AsyncImageLoader.loadPicture() -->
+        <ImageView
+            android:id="@+id/ml_item_thumbnail"
+            android:layout_width="120dp"
+            android:layout_height="75dp"
+            vlc:media="@{media}"
+            android:scaleType="fitXY"
+            android:background="@{cover}" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@{bgColor}">
+            <TextView
+                android:id="@+id/ml_item_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_toLeftOf="@+id/item_more"
+                android:layout_toStartOf="@+id/item_more"
+                android:layout_above="@+id/ml_item_resolution"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center_vertical"
+                android:maxLines="2"
+                android:paddingLeft="@dimen/half_default_margin"
+                android:paddingStart="@dimen/half_default_margin"
+                android:text="@{media.title}"
+                android:textColor="?attr/list_title"
+                android:textSize="17sp" />
+
+            <ImageView
+                android:id="@+id/item_more"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/ml_item_title"
+                android:layout_above="@+id/ml_item_time"
+                android:clickable="true"
+                android:contentDescription="@string/more_actions"
+                android:onClick="@{holder::onMoreClick}"
+                android:scaleType="center"
+                android:src="@drawable/ic_more" />
+
+            <TextView
+                android:id="@+id/ml_item_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_above="@+id/ml_item_progress"
+                android:fontFamily="sans-serif-light"
+                android:gravity="start"
+                android:paddingLeft="@dimen/half_default_margin"
+                android:paddingStart="@dimen/half_default_margin"
+                android:text="@{time}"
+                android:layout_alignWithParentIfMissing="true"
+                android:textColor="?attr/list_subtitle"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/ml_item_resolution"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@+id/ml_item_time"
+                android:layout_toEndOf="@+id/ml_item_time"
+                android:layout_above="@+id/ml_item_progress"
+                android:paddingRight="@dimen/half_default_margin"
+                android:paddingEnd="@dimen/half_default_margin"
+                android:layout_alignWithParentIfMissing="true"
+                android:fontFamily="sans-serif-light"
+                android:gravity="end"
+                android:text="@{resolution}"
+                android:textColor="?attr/list_subtitle"
+                android:textSize="14sp" />
+
+            <ProgressBar
+                android:id="@+id/ml_item_progress"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:paddingBottom="2dip"
+                android:paddingLeft="@dimen/half_default_margin"
+                android:paddingRight="@dimen/half_default_margin"
+                android:paddingTop="1dp"
+                android:indeterminate="false"
+                android:max="@{max}"
+                android:maxHeight="1dip"
+                android:minHeight="1dip"
+                android:progress="@{progress}"
+                android:progressDrawable="?attr/gridview_progressbar"
+                android:visibility="@{max == 0 ? View.INVISIBLE : View.VISIBLE}" />
+        </RelativeLayout>
+    </LinearLayout>
+</layout>
