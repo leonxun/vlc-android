@@ -171,8 +171,10 @@ TESTED_HASH=72a0033
 if [ ! -d "vlc" ]; then
     diagnostic "VLC source not found, cloning"
     git clone https://github.com/leonxun/vlc.git vlc
+	cd vlc
 	git checkout viatech-dev
 	git pull
+	cd ../
     checkfail "vlc source: git clone failed"
 else
     diagnostic "VLC source found"
