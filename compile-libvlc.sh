@@ -800,6 +800,8 @@ if [ ! -d "${MEDIALIBRARY_MODULE_DIR}/medialibrary" ]; then
     checkfail "medialibrary source: git clone failed"
     cd ${SRC_DIR}/medialibrary/medialibrary
     git submodule update --init libvlcpp
+	
+	git reset --hard ${MEDIALIBRARY_HASH}
     cd -
 else
     cd ${MEDIALIBRARY_MODULE_DIR}/medialibrary
@@ -807,6 +809,8 @@ else
       git pull --rebase
       rm -rf ${MEDIALIBRARY_MODULE_DIR}/jni/libs
       rm -rf ${MEDIALIBRARY_MODULE_DIR}/jni/obj
+	  
+	  git reset --hard ${MEDIALIBRARY_HASH}
     fi
     cd ${SRC_DIR}
 fi
